@@ -46,7 +46,7 @@
       cursor: pointer;
     }
 
-    /* モーダル表示 */
+    /* モーダル表示（拡大は1枚のみ読み込み） */
     .modal {
       position: fixed;
       inset: 0;
@@ -63,9 +63,7 @@
       border-radius: 8px;
     }
 
-    .modal.show {
-      display: flex;
-    }
+    .modal.show { display: flex; }
 
     footer {
       text-align: center;
@@ -81,23 +79,23 @@
   実習ポスターギャラリー
 </header>
 
-<!--
-【展示向け 最軽量構成】
-posters/
- ├ thumbs/  ← 一覧用（軽量・幅400〜600px）
- └ full/    ← 拡大用（幅1200〜1600px）
--->
-
 <main class="gallery">
-  <img src="posters/thumbs/poster01.jpg" data-full="posters/full/poster01.jpg" loading="lazy" alt="HETE 2023" />
-  <img src="posters/thumbs/poster02.jpg" data-full="posters/full/poster02.jpg" loading="lazy" alt="HETE 2024" />
-  <img src="posters/thumbs/poster03.jpg" data-full="posters/full/poster03.jpg" loading="lazy" alt="HETE 2025" />
-  <img src="posters/thumbs/poster04.jpg" data-full="posters/full/poster04.jpg" loading="lazy" alt="HETE 2025-1" />
-  <img src="posters/thumbs/poster05.jpg" data-full="posters/full/poster05.jpg" loading="lazy" alt="HETE 2025-2" />
-  <img src="posters/thumbs/poster06.jpg" data-full="posters/full/poster06.jpg" loading="lazy" alt="HETE 2025-3" />
+  <!-- 一覧表示：軽量化のため lazy loading -->
+  <img src="posters/HETE2023.jpg" loading="lazy" alt="HETE 2023" />
+  <img src="posters/HETE2024.jpg" loading="lazy" alt="HETE 2024" />
+  <img src="posters/HETE2025.jpg" loading="lazy" alt="HETE 2025" />
+  <img src="posters/HETE2025 (1).jpg" loading="lazy" alt="HETE 2025 1" />
+  <img src="posters/HETE2025 (2).jpg" loading="lazy" alt="HETE 2025 2" />
+  <img src="posters/HETE2025 (3).jpg" loading="lazy" alt="HETE 2025 3" />
+  <img src="posters/HETE20251 (4).jpg" loading="lazy" alt="HETE 2025 4" />
+  <img src="posters/HETE2025 (5).jpg" loading="lazy" alt="HETE 2025 5" />
+  <img src="posters/HETE2025 (6).jpg" loading="lazy" alt="HETE 2025 6" />
+  <img src="posters/HETE2025 (7).jpg" loading="lazy" alt="HETE 2025 7" />
+  <img src="posters/HETE2025 (8).jpg" loading="lazy" alt="HETE 2025 8" />
+  <img src="posters/HETE2025 (9).jpg" loading="lazy" alt="HETE 2025 9" />
 </main>
 
-<!-- 拡大表示用 -->
+<!-- 拡大表示用（タップした1枚だけ高解像度を表示） -->
 <div class="modal" id="modal">
   <img id="modalImage" src="" alt="拡大表示" />
 </div>
@@ -112,8 +110,8 @@ posters/
 
   document.querySelectorAll('.gallery img').forEach(img => {
     img.addEventListener('click', () => {
-      const full = img.dataset.full;
-      modalImage.src = full;
+      // 拡大時に初めて画像を読み込む
+      modalImage.src = img.src;
       modal.classList.add('show');
     });
   });
