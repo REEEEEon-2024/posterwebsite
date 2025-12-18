@@ -44,12 +44,6 @@
       border-radius: 8px;
       background: var(--card);
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.02);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
 
     /* モーダル表示 */
@@ -87,22 +81,20 @@
   実習ポスターギャラリー
 </header>
 
+<!--
+【展示向け 最軽量構成】
+posters/
+ ├ thumbs/  ← 一覧用（軽量・幅400〜600px）
+ └ full/    ← 拡大用（幅1200〜1600px）
+-->
+
 <main class="gallery">
- 
-   <img src="posters/HETE2023.jpg" alt="HETE 2023" />
-  <img src="posters/HETE2024.jpg" alt="HETE 2024" />
-  <img src="posters/HETE2025.jpg" alt="HETE 2025" />
-  <img src="posters/HETE2025 (1).jpg" alt="HETE 2025 1" />
-  <img src="posters/HETE2025 (2).jpg" alt="HETE2025 2" />
-  <img src="posters/HETE2025 (3).jpg" alt="HETE2025 3" />
-  <img src="posters/HETE20251 (4).jpg" alt="HETE2025 4" />
-  <img src="posters/HETE2025 (5).jpg" alt="HETE2025 5" />
-  <img src="posters/HETE2025 (6).jpg" alt="HETE2025 6" />
-  <img src="posters/HETE2025 (7).jpg" alt="HETE2025 7" />
-  <img src="posters/HETE2025 (8).jpg" alt="HETE2025 8" />
-  <img src="posters/HETE2025 (9).jpg" alt="HETE2025 9" />
- 
-  
+  <img src="posters/thumbs/poster01.jpg" data-full="posters/full/poster01.jpg" loading="lazy" alt="HETE 2023" />
+  <img src="posters/thumbs/poster02.jpg" data-full="posters/full/poster02.jpg" loading="lazy" alt="HETE 2024" />
+  <img src="posters/thumbs/poster03.jpg" data-full="posters/full/poster03.jpg" loading="lazy" alt="HETE 2025" />
+  <img src="posters/thumbs/poster04.jpg" data-full="posters/full/poster04.jpg" loading="lazy" alt="HETE 2025-1" />
+  <img src="posters/thumbs/poster05.jpg" data-full="posters/full/poster05.jpg" loading="lazy" alt="HETE 2025-2" />
+  <img src="posters/thumbs/poster06.jpg" data-full="posters/full/poster06.jpg" loading="lazy" alt="HETE 2025-3" />
 </main>
 
 <!-- 拡大表示用 -->
@@ -120,7 +112,8 @@
 
   document.querySelectorAll('.gallery img').forEach(img => {
     img.addEventListener('click', () => {
-      modalImage.src = img.src;
+      const full = img.dataset.full;
+      modalImage.src = full;
       modal.classList.add('show');
     });
   });
